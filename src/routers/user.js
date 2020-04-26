@@ -1,8 +1,10 @@
 const express = require("express");
 const User = require("../models/user");
-const auth = require("../middleware/auth");
+//Multer is used for sending images and file
 const multer = require("multer");
+//Sharp is used for performing operations on images
 const sharp = require("sharp");
+const auth = require("../middleware/auth");
 const {
   sendWelcomeEmail,
   sendCancellationEmail,
@@ -60,7 +62,7 @@ router.post(
   auth,
   upload.single("avatar"),
   async (req, res) => {
-    const buffer = sharp(req.file.buffer)
+    const buffer = await sharp(req.file.buffer)
       .png()
       .resize({ width: 250, height: 250 })
       .toBuffer();
@@ -150,7 +152,7 @@ router.patch("/users/me", auth, async (req, res) => {
 router.delete("/users/me", auth, async (req, res) => {
   try {
     //Removing user from collection
-    req.user.remove();
+    await req.user.remove();
     sendCancellationEmail(req.user.email, req.user.name);
     res.send(req.user);
   } catch (e) {
