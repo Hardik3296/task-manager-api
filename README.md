@@ -36,7 +36,7 @@ for email validation among others.
 
 ### Running the code
 1) Clone the repository
-2) Navigate to the root folder and run npm install to install all the dependencies
-3) Run npm start to run the server
+2) Navigate to the root folder and run **npm install** to install all the dependencies
+3) Run **npm start** to run the server
 
 Please feel free to drop any suggestions at hardikgaur@geu.ac.in.
